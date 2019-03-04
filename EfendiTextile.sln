@@ -3,7 +3,37 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfendiTextile.Data", "EfendiTextile.Data\EfendiTextile.Data.csproj", "{D39EB96F-D609-4AB4-BA9B-E4E08DF557CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfendiTextile.Model", "EfendiTextile.Model\EfendiTextile.Model.csproj", "{0537D7A1-A65F-4360-9880-1EA54A7D3694}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfendiTextile.Service", "EfendiTextile.Service\EfendiTextile.Service.csproj", "{34A80168-DBAA-4C3C-B96A-C7C78ABC1B6A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfendiTextile.Admin", "EfendiTextile.Admin\EfendiTextile.Admin.csproj", "{8F100DC0-0793-4D1F-B343-41282C28CB2D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D39EB96F-D609-4AB4-BA9B-E4E08DF557CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D39EB96F-D609-4AB4-BA9B-E4E08DF557CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D39EB96F-D609-4AB4-BA9B-E4E08DF557CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D39EB96F-D609-4AB4-BA9B-E4E08DF557CA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0537D7A1-A65F-4360-9880-1EA54A7D3694}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0537D7A1-A65F-4360-9880-1EA54A7D3694}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0537D7A1-A65F-4360-9880-1EA54A7D3694}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0537D7A1-A65F-4360-9880-1EA54A7D3694}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34A80168-DBAA-4C3C-B96A-C7C78ABC1B6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34A80168-DBAA-4C3C-B96A-C7C78ABC1B6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34A80168-DBAA-4C3C-B96A-C7C78ABC1B6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34A80168-DBAA-4C3C-B96A-C7C78ABC1B6A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F100DC0-0793-4D1F-B343-41282C28CB2D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F100DC0-0793-4D1F-B343-41282C28CB2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F100DC0-0793-4D1F-B343-41282C28CB2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F100DC0-0793-4D1F-B343-41282C28CB2D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
