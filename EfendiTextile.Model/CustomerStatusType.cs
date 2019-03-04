@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace EfendiTextile.Model
 {
-    public class Class1
+    public enum CustomerStatusType
     {
+        Customer=1,
+        NonCustomer=2
     }
 }
