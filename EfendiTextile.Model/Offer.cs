@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EfendiTextile.Model
 {
- public   class Offer:BaseEntity
+ public class Offer:BaseEntity
     {
         public Offer() {
 
@@ -19,8 +19,8 @@ namespace EfendiTextile.Model
         [DataType(DataType.Currency)]
         [Display(Name = "Teklif")]
         public float OfferPrice { get; set; }
-        ICollection<Customer> Customers { get; set; }
-        ICollection<Product> Products { get; set; }
+        public virtual  ICollection<Customer> Customers { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
 
 
     }

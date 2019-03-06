@@ -9,7 +9,7 @@ namespace EfendiTextile.Model
 {
     public class Bill:BaseEntity
     {
-        public int BillId { get; set; }
+        
         [Display(Name="Fatura")]
         public string Title { get; set; }
         [Display(Name ="Fatura Açıklama")]

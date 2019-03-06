@@ -11,6 +11,7 @@ namespace EfendiTextile.Data
     {
         public ApplicationDbContext() : base("name=DefaultConnection")
         {
+           
 
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

@@ -12,6 +12,7 @@ namespace EfendiTextile.Model
         public Region() {
             Customers = new HashSet<Customer>();
         }
+        [Required(ErrorMessage ="İlçe Boş Geçilemez")]
         [Display(Name ="İlçe")]
         public string City { get; set; }
         [Display(Name = "İl")]

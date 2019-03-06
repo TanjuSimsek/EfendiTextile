@@ -12,6 +12,7 @@ namespace EfendiTextile.Model
         public Customer() {
 
             Bills = new HashSet<Bill>();
+            Offers = new HashSet<Offer>();
         }
 
 
@@ -26,7 +27,7 @@ namespace EfendiTextile.Model
         [Display(Name = "Bakiye")]
         [DataType(DataType.Currency)]
         public float Balance { get; set; }
-        public Guid CustomerId { get; set; }
+       // public Guid CustomerId { get; set; }
         [Display(Name = "Müşteri Adı")]
         public string CustomerName { get; set; }
         [Display(Name = "Müşteri Soyadı")]
@@ -34,12 +35,15 @@ namespace EfendiTextile.Model
         [Display(Name = "Müşteri Telefon")]
         public string Phone { get; set; }
         [Display(Name = "Müşteri Email")]
+        [EmailAddress(ErrorMessage ="E-Mail Formatında Olmalı")]
         public string Email { get; set; }
         [Display(Name = "Müşteri Adres")]
         public string Address { get; set; }
         public Guid RegionId { get; set; }
         public virtual Region Region { get; set; }
-       public  CustomerStatusType CustomerStatusType{ get; set; }
-      public virtual  ICollection<Bill> Bills { get; set; }
+        public  CustomerStatusType CustomerStatusType{ get; set; }
+        public virtual  ICollection<Bill> Bills { get; set; }
+        public virtual ICollection<Offer> Offers { get; set; }
+
     }
 }

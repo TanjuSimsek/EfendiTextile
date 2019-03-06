@@ -12,6 +12,7 @@ namespace EfendiTextile.Model
         public Product() {
 
             Orders = new HashSet<Order>();
+            Offers = new HashSet<Offer>();
         }
         [Display(Name ="Urün Adı")]
         public string ProductName { get; set; }
@@ -26,6 +27,7 @@ namespace EfendiTextile.Model
         public Guid? CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Offer> Offers { get; set; }
 
     }
 }
