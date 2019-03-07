@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EfendiTextile.Admin.Models;
+using EfendiTextile.Model;
 
 namespace EfendiTextile.Admin.Controllers
 {

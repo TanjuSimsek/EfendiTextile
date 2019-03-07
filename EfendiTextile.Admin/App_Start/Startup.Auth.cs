@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using EfendiTextile.Admin.Models;
+using EfendiTextile.Model;
+using EfendiTextile.Data;
 
 namespace EfendiTextile.Admin
 {

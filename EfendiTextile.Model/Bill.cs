@@ -14,7 +14,7 @@ namespace EfendiTextile.Model
         public string Title { get; set; }
         [Display(Name ="Fatura Açıklama")]
         public string Description { get; set; }
-        public Guid CustomerId { get; set; }
+        public Guid? CustomerId { get; set; }
         public virtual Customer Customer { get; set; }
        
         

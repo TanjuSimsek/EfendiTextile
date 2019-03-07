@@ -11,6 +11,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using EfendiTextile.Admin.Models;
+using EfendiTextile.Model;
+using EfendiTextile.Data;
 
 namespace EfendiTextile.Admin
 {

@@ -55,16 +55,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationDbContext.cs" />
-    <Compile Include="Builder\BillController.cs" />
+    <Compile Include="Builder\BillBuilder.cs" />
     <Compile Include="Builder\CategoryBuilder.cs" />
     <Compile Include="Builder\CustomerBuilder.cs" />
     <Compile Include="Builder\OfferBuilder.cs" />
     <Compile Include="Builder\OrderBuilder.cs" />
     <Compile Include="Builder\ProductBuilder.cs" />
     <Compile Include="Builder\RegionBuilder.cs" />
-    <Compile Include="Migrations\201903061136373_InitialCreate.cs" />
-    <Compile Include="Migrations\201903061136373_InitialCreate.Designer.cs">
-      <DependentUpon>201903061136373_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201903070742462_InitialCreatee.cs" />
+    <Compile Include="Migrations\201903070742462_InitialCreatee.Designer.cs">
+      <DependentUpon>201903070742462_InitialCreatee.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -82,8 +82,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903061136373_InitialCreate.resx">
-      <DependentUpon>201903061136373_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903070742462_InitialCreatee.resx">
+      <DependentUpon>201903070742462_InitialCreatee.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
