@@ -32,59 +32,61 @@
                     </a>
                 </div>
                 <div class="login-form">
-                    <form>
-                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "splash-container", role = "form" }))
-                        {
-                        
+
+                    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "splash-container", role = "form" }))
+                    {
 
 
 
-                            <div class="card-header">
-                                <h3 class="mb-1">Kayıt Formu</h3>
-                                <p>Lütfen Kullanıcı Bilgilerinizi Giriniz.</p>
+
+                        <div class="card-header">
+                            <h3 class="mb-1">Kayıt Formu</h3>
+                            <p>Lütfen Kullanıcı Bilgilerinizi Giriniz.</p>
+                        </div>
+
+                        @Html.AntiForgeryToken()
+
+                        <h4>
+                            Yeni bir hesap oluştur
+
+                        </h4>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+
+                            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
                             </div>
-                            
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.Password, "Şifre", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(m => m.ConfirmPassword, "Şifre Onay", new { @class = "col-md-2 control-label" })
+                            <div class="col-md-10">
+                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> Agree the terms and policy
+                            </label>
+                        </div>
 
+                        <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Yeni Kayıt</button>
+                        <div class="social-login-content">
 
-                                <h4>
-                                    Yeni bir hesap oluştur
-                                </h4>
-                                <div class="form-group">
+                        </div>
+                        <div class="register-link m-t-15 text-center">
+                            <p>Kayıtlı Kullanıcı? <a href="@Url.Action("Login","Account")" class="text-secondary">Giriş</a></p>
+                        </div>
 
-                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.Password,"Şifre", new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    @Html.LabelFor(m => m.ConfirmPassword,"Şifre Onay", new { @class = "col-md-2 control-label" })
-                                    <div class="col-md-10">
-                                        @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                                    </div>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"> Agree the terms and policy
-                                    </label>
-                                </div>
-                                
-                                    <button type="submit" class="btn btn-primary btn-flat m-b-30 m-t-30">Yeni Kayıt</button>
-                                    <div class="social-login-content">
-
-                                    </div>
-                                    <div class="register-link m-t-15 text-center">
-                                        <p>Kayıtlı Kullanıcı? <a href="@Url.Action("Login","Account")" class="text-secondary">Giriş</a></p>
-                                    </div>
-                              
-                                }
-</form>
-                    </div>
+                    }
+                    </form>
+                </div>
                 </div>
             </div>
         </div>
