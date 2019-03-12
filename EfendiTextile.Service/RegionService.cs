@@ -56,7 +56,7 @@ namespace EfendiTextile.Service
 
         public IEnumerable<Region> GetAllByName(string name)
         {
-            return regionRepository.GetAll(w => w.City.Contains(name));
+            return regionRepository.GetAll(w => w.RegionName.Contains(name));
         }
 
         public void Insert(Region entity)
@@ -67,16 +67,15 @@ namespace EfendiTextile.Service
 
         public IEnumerable<Region> Search(string name)
         {
-            return regionRepository.GetAll(e => e.City.Contains(name));
+            return regionRepository.GetAll(e => e.RegionName.Contains(name));
         }
 
         public void Update(Region entity)
         {
             var region = regionRepository.Find(entity.Id);
-            region.City = entity.City;
-            region.Country = entity.Country;
-            region.District = entity.District;
-            regionRepository.Update(region);
+            region.RegionName= entity.RegionName;
+          
+           regionRepository.Update(region);
             unitOfWork.SaveChanges();
         }
     }

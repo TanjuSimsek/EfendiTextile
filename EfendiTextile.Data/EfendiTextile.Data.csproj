@@ -57,18 +57,17 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Builder\BillBuilder.cs" />
     <Compile Include="Builder\CategoryBuilder.cs" />
+    <Compile Include="Builder\CityBuilder.cs" />
+    <Compile Include="Builder\CountryBuilder.cs" />
     <Compile Include="Builder\CustomerBuilder.cs" />
+    <Compile Include="Builder\DistrictBuilder.cs" />
     <Compile Include="Builder\OfferBuilder.cs" />
     <Compile Include="Builder\OrderBuilder.cs" />
     <Compile Include="Builder\ProductBuilder.cs" />
     <Compile Include="Builder\RegionBuilder.cs" />
-    <Compile Include="Migrations\201903070742462_InitialCreatee.cs" />
-    <Compile Include="Migrations\201903070742462_InitialCreatee.Designer.cs">
-      <DependentUpon>201903070742462_InitialCreatee.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903080911127_LoginAdd.cs" />
-    <Compile Include="Migrations\201903080911127_LoginAdd.Designer.cs">
-      <DependentUpon>201903080911127_LoginAdd.cs</DependentUpon>
+    <Compile Include="Migrations\201903121020594_InitialCreate.cs" />
+    <Compile Include="Migrations\201903121020594_InitialCreate.Designer.cs">
+      <DependentUpon>201903121020594_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,11 +85,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903070742462_InitialCreatee.resx">
-      <DependentUpon>201903070742462_InitialCreatee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903080911127_LoginAdd.resx">
-      <DependentUpon>201903080911127_LoginAdd.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903121020594_InitialCreate.resx">
+      <DependentUpon>201903121020594_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

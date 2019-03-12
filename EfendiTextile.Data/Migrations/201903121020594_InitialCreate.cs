@@ -3,7 +3,7 @@ namespace EfendiTextile.Data.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreatee : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -40,7 +40,81 @@ namespace EfendiTextile.Data.Migrations
                         Email = c.String(),
                         Address = c.String(nullable: false, maxLength: 200),
                         RegionId = c.Guid(nullable: false),
+                        CountryId = c.Guid(),
+                        CityId = c.Guid(),
+                        DistrictId = c.Guid(),
                         CustomerStatusType = c.Int(nullable: false),
+                        CreatedBy = c.String(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedBy = c.String(),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Countries", t => t.CountryId)
+                .ForeignKey("dbo.Cities", t => t.CityId)
+                .ForeignKey("dbo.Districts", t => t.DistrictId)
+                .ForeignKey("dbo.Regions", t => t.RegionId, cascadeDelete: true)
+                .Index(t => t.RegionId)
+                .Index(t => t.CountryId)
+                .Index(t => t.CityId)
+                .Index(t => t.DistrictId);
+            
+            CreateTable(
+                "dbo.Cities",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        CityName = c.String(),
+                        CountryId = c.Guid(nullable: false),
+                        CreatedBy = c.String(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedBy = c.String(),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: true)
+                .Index(t => t.CountryId);
+            
+            CreateTable(
+                "dbo.Countries",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        CountryName = c.String(),
+                        CreatedBy = c.String(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedBy = c.String(),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+            CreateTable(
+                "dbo.Regions",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        RegionName = c.String(nullable: false, maxLength: 100),
+                        CityId = c.Guid(nullable: false),
+                        CreatedBy = c.String(),
+                        CreatedAt = c.DateTime(nullable: false),
+                        UpdatedBy = c.String(),
+                        UpdatedAt = c.DateTime(nullable: false),
+                        IsActive = c.Boolean(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id)
+                .ForeignKey("dbo.Cities", t => t.CityId, cascadeDelete: true)
+                .Index(t => t.CityId);
+            
+            CreateTable(
+                "dbo.Districts",
+                c => new
+                    {
+                        Id = c.Guid(nullable: false),
+                        DistrictName = c.String(),
+                        RegionId = c.Guid(nullable: false),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
@@ -71,11 +145,11 @@ namespace EfendiTextile.Data.Migrations
                 c => new
                     {
                         Id = c.Guid(nullable: false),
-                        ProductName = c.String(),
+                        ProductName = c.String(nullable: false, maxLength: 200),
                         QuantityPerUnit = c.Int(nullable: false),
                         BuyyingPrice = c.Single(nullable: false),
                         UnıtsInStock = c.Boolean(nullable: false),
-                        CategoryId = c.Guid(),
+                        CategoryId = c.Guid(nullable: false),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
@@ -83,7 +157,7 @@ namespace EfendiTextile.Data.Migrations
                         IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Categories", t => t.CategoryId)
+                .ForeignKey("dbo.Categories", t => t.CategoryId, cascadeDelete: true)
                 .Index(t => t.CategoryId);
             
             CreateTable(
@@ -109,22 +183,6 @@ namespace EfendiTextile.Data.Migrations
                         Id = c.Guid(nullable: false),
                         UnitPrice = c.Single(nullable: false),
                         Quantity = c.Int(nullable: false),
-                        CreatedBy = c.String(),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedBy = c.String(),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        IsActive = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id);
-            
-            CreateTable(
-                "dbo.Regions",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        City = c.String(nullable: false),
-                        Country = c.String(),
-                        District = c.String(),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
@@ -217,17 +275,17 @@ namespace EfendiTextile.Data.Migrations
                 .Index(t => t.OfferId);
             
             CreateTable(
-                "dbo.OrderProducts",
+                "dbo.ProductIOfOrder",
                 c => new
                     {
-                        Order_Id = c.Guid(nullable: false),
-                        Product_Id = c.Guid(nullable: false),
+                        ProductRefId = c.Guid(nullable: false),
+                        OrderRefId = c.Guid(nullable: false),
                     })
-                .PrimaryKey(t => new { t.Order_Id, t.Product_Id })
-                .ForeignKey("dbo.Orders", t => t.Order_Id, cascadeDelete: true)
-                .ForeignKey("dbo.Products", t => t.Product_Id, cascadeDelete: true)
-                .Index(t => t.Order_Id)
-                .Index(t => t.Product_Id);
+                .PrimaryKey(t => new { t.ProductRefId, t.OrderRefId })
+                .ForeignKey("dbo.Products", t => t.ProductRefId, cascadeDelete: true)
+                .ForeignKey("dbo.Orders", t => t.OrderRefId, cascadeDelete: true)
+                .Index(t => t.ProductRefId)
+                .Index(t => t.OrderRefId);
             
             CreateTable(
                 "dbo.ProductOfOffer",
@@ -254,15 +312,21 @@ namespace EfendiTextile.Data.Migrations
             DropForeignKey("dbo.Customers", "RegionId", "dbo.Regions");
             DropForeignKey("dbo.ProductOfOffer", "OfferId", "dbo.Products");
             DropForeignKey("dbo.ProductOfOffer", "ProductId", "dbo.Offers");
-            DropForeignKey("dbo.OrderProducts", "Product_Id", "dbo.Products");
-            DropForeignKey("dbo.OrderProducts", "Order_Id", "dbo.Orders");
+            DropForeignKey("dbo.ProductIOfOrder", "OrderRefId", "dbo.Orders");
+            DropForeignKey("dbo.ProductIOfOrder", "ProductRefId", "dbo.Products");
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.CustomerOfOffer", "OfferId", "dbo.Customers");
             DropForeignKey("dbo.CustomerOfOffer", "CustomerId", "dbo.Offers");
+            DropForeignKey("dbo.Districts", "RegionId", "dbo.Regions");
+            DropForeignKey("dbo.Customers", "DistrictId", "dbo.Districts");
+            DropForeignKey("dbo.Regions", "CityId", "dbo.Cities");
+            DropForeignKey("dbo.Customers", "CityId", "dbo.Cities");
+            DropForeignKey("dbo.Customers", "CountryId", "dbo.Countries");
+            DropForeignKey("dbo.Cities", "CountryId", "dbo.Countries");
             DropIndex("dbo.ProductOfOffer", new[] { "OfferId" });
             DropIndex("dbo.ProductOfOffer", new[] { "ProductId" });
-            DropIndex("dbo.OrderProducts", new[] { "Product_Id" });
-            DropIndex("dbo.OrderProducts", new[] { "Order_Id" });
+            DropIndex("dbo.ProductIOfOrder", new[] { "OrderRefId" });
+            DropIndex("dbo.ProductIOfOrder", new[] { "ProductRefId" });
             DropIndex("dbo.CustomerOfOffer", new[] { "OfferId" });
             DropIndex("dbo.CustomerOfOffer", new[] { "CustomerId" });
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
@@ -272,21 +336,30 @@ namespace EfendiTextile.Data.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Products", new[] { "CategoryId" });
+            DropIndex("dbo.Districts", new[] { "RegionId" });
+            DropIndex("dbo.Regions", new[] { "CityId" });
+            DropIndex("dbo.Cities", new[] { "CountryId" });
+            DropIndex("dbo.Customers", new[] { "DistrictId" });
+            DropIndex("dbo.Customers", new[] { "CityId" });
+            DropIndex("dbo.Customers", new[] { "CountryId" });
             DropIndex("dbo.Customers", new[] { "RegionId" });
             DropIndex("dbo.Bills", new[] { "CustomerId" });
             DropTable("dbo.ProductOfOffer");
-            DropTable("dbo.OrderProducts");
+            DropTable("dbo.ProductIOfOrder");
             DropTable("dbo.CustomerOfOffer");
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");
             DropTable("dbo.AspNetUserRoles");
             DropTable("dbo.AspNetRoles");
-            DropTable("dbo.Regions");
             DropTable("dbo.Orders");
             DropTable("dbo.Categories");
             DropTable("dbo.Products");
             DropTable("dbo.Offers");
+            DropTable("dbo.Districts");
+            DropTable("dbo.Regions");
+            DropTable("dbo.Countries");
+            DropTable("dbo.Cities");
             DropTable("dbo.Customers");
             DropTable("dbo.Bills");
         }

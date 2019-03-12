@@ -7,13 +7,13 @@ namespace EfendiTextile.Data.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class InitialCreatee : IMigrationMetadata
+    public sealed partial class InitialCreate : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreatee));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialCreate));
         
         string IMigrationMetadata.Id
         {
-            get { return "201903070742462_InitialCreatee"; }
+            get { return "201903121020594_InitialCreate"; }
         }
         
         string IMigrationMetadata.Source

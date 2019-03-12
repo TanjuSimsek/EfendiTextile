@@ -12,11 +12,8 @@ namespace EfendiTextile.Data.Builder
     {
         public RegionBuilder(EntityTypeConfiguration<Region> entity) {
 
-            entity.Property(e => e.City).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.Country).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.City).IsRequired().HasMaxLength(100);
-            entity.Property(e => e.District).IsRequired().HasMaxLength(100);
-
+            entity.Property(p => p.RegionName).IsRequired().HasMaxLength(100);
+            entity.HasRequired(p => p.City).WithMany(p => p.Regions).HasForeignKey(f => f.CityId);
 
         }
     }
