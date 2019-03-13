@@ -25,6 +25,7 @@ namespace EfendiTextile.Admin.Controllers
         }
         public ActionResult Create()
         {
+            ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "CategoryName");
             var product = new Product();
             return View(product);
         }
@@ -37,6 +38,7 @@ namespace EfendiTextile.Admin.Controllers
                productService.Insert(product);
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "CategoryName",product.CategoryId);
             return View();
         }
         public ActionResult Edit(Guid id)
@@ -48,6 +50,7 @@ namespace EfendiTextile.Admin.Controllers
                 return HttpNotFound();
 
             }
+            ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "CategoryName", product.CategoryId);
             return View(product);
         }
         [HttpPost]
@@ -65,6 +68,7 @@ namespace EfendiTextile.Admin.Controllers
                 productService.Update(model);
                 return RedirectToAction("Index");
             }
+            ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "CategoryName",product.CategoryId);
             return View();
         }
         public ActionResult Delete(Guid id)

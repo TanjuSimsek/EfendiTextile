@@ -26,9 +26,11 @@
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
     <link href="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/jqvmap@1.5.1/dist/jqvmap.min.css" rel="stylesheet">
+     <link href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" />
 
     <link href="https://cdn.jsdelivr.net/npm/weathericons@2.1.0/css/weather-icons.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.css" rel="stylesheet" />
+    
 
     <style>
         #weatherWidget .currentDesc {
@@ -501,6 +503,20 @@
                 // Bar Chart #flotBarChart End
             });
         </script>
-        @RenderSection("scripts", required: false)
+       <script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+ 
+          <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.10.19/i18n/Turkish.json"
+                }
+            });
+        });
+    </script>
+
+    @RenderSection("scripts", required: false)
+   <!-- @RenderSection("sparklineRevenueScripts", required: false)-->
 </body>
 </html>
+
