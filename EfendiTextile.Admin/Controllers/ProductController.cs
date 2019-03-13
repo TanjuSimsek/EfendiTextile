@@ -8,8 +8,10 @@ using System.Web.Mvc;
 
 namespace EfendiTextile.Admin.Controllers
 {
+    [Authorize]
     public class ProductController:Controller
     {
+       
         private readonly ICategoryService categoryService;
         private readonly IProductService productService;
         public ProductController(ICategoryService categoryService, IProductService productService) {
