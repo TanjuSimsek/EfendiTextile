@@ -42,5 +42,10 @@ namespace EfendiTextile.Data
 
         }
 
+        public System.Data.Entity.DbSet<EfendiTextile.Model.City> Cities { get; set; }
+
+        public System.Data.Entity.DbSet<EfendiTextile.Model.Country> Countries { get; set; }
+
+      
     }
 }

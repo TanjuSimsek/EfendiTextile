@@ -42,7 +42,6 @@ namespace EfendiTextile.Data.Migrations
                         RegionId = c.Guid(nullable: false),
                         CountryId = c.Guid(),
                         CityId = c.Guid(),
-                        DistrictId = c.Guid(),
                         CustomerStatusType = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
@@ -53,12 +52,10 @@ namespace EfendiTextile.Data.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Countries", t => t.CountryId)
                 .ForeignKey("dbo.Cities", t => t.CityId)
-                .ForeignKey("dbo.Districts", t => t.DistrictId)
                 .ForeignKey("dbo.Regions", t => t.RegionId, cascadeDelete: true)
                 .Index(t => t.RegionId)
                 .Index(t => t.CountryId)
-                .Index(t => t.CityId)
-                .Index(t => t.DistrictId);
+                .Index(t => t.CityId);
             
             CreateTable(
                 "dbo.Cities",
@@ -66,7 +63,7 @@ namespace EfendiTextile.Data.Migrations
                     {
                         Id = c.Guid(nullable: false),
                         CityName = c.String(),
-                        CountryId = c.Guid(nullable: false),
+                        CountryId = c.Guid(),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
@@ -74,7 +71,7 @@ namespace EfendiTextile.Data.Migrations
                         IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Countries", t => t.CountryId, cascadeDelete: true)
+                .ForeignKey("dbo.Countries", t => t.CountryId)
                 .Index(t => t.CountryId);
             
             CreateTable(
@@ -107,23 +104,6 @@ namespace EfendiTextile.Data.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Cities", t => t.CityId, cascadeDelete: true)
                 .Index(t => t.CityId);
-            
-            CreateTable(
-                "dbo.Districts",
-                c => new
-                    {
-                        Id = c.Guid(nullable: false),
-                        DistrictName = c.String(),
-                        RegionId = c.Guid(nullable: false),
-                        CreatedBy = c.String(),
-                        CreatedAt = c.DateTime(nullable: false),
-                        UpdatedBy = c.String(),
-                        UpdatedAt = c.DateTime(nullable: false),
-                        IsActive = c.Boolean(nullable: false),
-                    })
-                .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Regions", t => t.RegionId, cascadeDelete: true)
-                .Index(t => t.RegionId);
             
             CreateTable(
                 "dbo.Offers",
@@ -317,8 +297,6 @@ namespace EfendiTextile.Data.Migrations
             DropForeignKey("dbo.Products", "CategoryId", "dbo.Categories");
             DropForeignKey("dbo.CustomerOfOffer", "OfferId", "dbo.Customers");
             DropForeignKey("dbo.CustomerOfOffer", "CustomerId", "dbo.Offers");
-            DropForeignKey("dbo.Districts", "RegionId", "dbo.Regions");
-            DropForeignKey("dbo.Customers", "DistrictId", "dbo.Districts");
             DropForeignKey("dbo.Regions", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Customers", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Customers", "CountryId", "dbo.Countries");
@@ -336,10 +314,8 @@ namespace EfendiTextile.Data.Migrations
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Products", new[] { "CategoryId" });
-            DropIndex("dbo.Districts", new[] { "RegionId" });
             DropIndex("dbo.Regions", new[] { "CityId" });
             DropIndex("dbo.Cities", new[] { "CountryId" });
-            DropIndex("dbo.Customers", new[] { "DistrictId" });
             DropIndex("dbo.Customers", new[] { "CityId" });
             DropIndex("dbo.Customers", new[] { "CountryId" });
             DropIndex("dbo.Customers", new[] { "RegionId" });
@@ -356,7 +332,6 @@ namespace EfendiTextile.Data.Migrations
             DropTable("dbo.Categories");
             DropTable("dbo.Products");
             DropTable("dbo.Offers");
-            DropTable("dbo.Districts");
             DropTable("dbo.Regions");
             DropTable("dbo.Countries");
             DropTable("dbo.Cities");

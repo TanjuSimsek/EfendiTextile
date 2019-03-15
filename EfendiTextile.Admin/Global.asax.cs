@@ -59,7 +59,7 @@ namespace EfendiTextile.Admin
             builder.RegisterType(typeof(CategoryService)).As(typeof(ICategoryService)).InstancePerDependency();
             builder.RegisterType(typeof(CityService)).As(typeof(ICityService)).InstancePerDependency();
             builder.RegisterType(typeof(CountryService)).As(typeof(ICountryService)).InstancePerDependency();
-            builder.RegisterType(typeof(DistrictService)).As(typeof(IDistrictService)).InstancePerDependency();
+           
             builder.RegisterType(typeof(CustomerService)).As(typeof(ICustomerService)).InstancePerDependency();
             builder.RegisterType(typeof(OfferService)).As(typeof(IOfferService)).InstancePerDependency();
             builder.RegisterType(typeof(OrderService)).As(typeof(IOrderService)).InstancePerDependency();

@@ -11,12 +11,15 @@ namespace EfendiTextile.Model
     {
         public Region() {
             Customers = new HashSet<Customer>();
-            Districts = new HashSet<District>();
+           
         }
+        [Display(Name ="İlçe Adı")]
         public string RegionName { get; set; }
+        [Display(Name = "İlçe Adı")]
         public Guid CityId { get; set; }
+        
         public virtual City City { get; set; }
         public virtual ICollection<Customer> Customers { get; set; }
-        public virtual ICollection<District> Districts { get; set; }
+       
     }
 }

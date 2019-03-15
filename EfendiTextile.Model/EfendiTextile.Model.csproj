@@ -62,7 +62,6 @@
     <Compile Include="Country.cs" />
     <Compile Include="Customer.cs" />
     <Compile Include="CustomerStatusType.cs" />
-    <Compile Include="District.cs" />
     <Compile Include="Offer.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Product.cs" />

@@ -39,16 +39,17 @@ namespace EfendiTextile.Model
         public string Email { get; set; }
         [Display(Name = "Müşteri Adres")]
         public string Address { get; set; }
+        [Display(Name = "İlçe")]
         public Guid? RegionId { get; set; }
         public virtual Region Region { get; set; }
-
+        [Display(Name = "Ülke")]
         public Guid? CountryId { get; set; }
         public virtual Country Country { get; set; }
+        [Display(Name = "Şehir")]
         public Guid? CityId { get; set; }
         public virtual City City { get; set; }
-        public Guid? DistrictId { get; set; }
-        public virtual District District { get; set; }
-
+       
+        [Display(Name ="Müşteri Durum")]
         public  CustomerStatusType CustomerStatusType{ get; set; }
         public virtual  ICollection<Bill> Bills { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }

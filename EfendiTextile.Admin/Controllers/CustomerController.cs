@@ -1,4 +1,5 @@
-﻿using EfendiTextile.Model;
+﻿using EfendiTextile.Data;
+using EfendiTextile.Model;
 using EfendiTextile.Service;
 using System;
 using System.Collections.Generic;
@@ -15,14 +16,14 @@ namespace EfendiTextile.Admin.Controllers
         private readonly IRegionService regionService;
         private readonly ICountryService countryService;
         private readonly ICityService cityService;
-        private readonly IDistrictService districtService;
+      
         
-        public CustomerController(ICustomerService customerService,IRegionService regionService,ICountryService countryService,ICityService cityService,IDistrictService districtService) {
+        public CustomerController(ICustomerService customerService,IRegionService regionService,ICountryService countryService,ICityService cityService) {
             this.customerService = customerService;
             this.regionService = regionService;
             this.countryService = countryService;
             this.cityService = cityService;
-            this.districtService = districtService;
+           
 
         }
         public ActionResult Index()
@@ -31,12 +32,28 @@ namespace EfendiTextile.Admin.Controllers
             return View(customer);
 
         }
+        public ActionResult GetCities(Guid? countryId)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var cities = db.Cities.Where(c => c.CountryId == countryId).OrderBy(o => o.CityName).Select(x => new { x.Id, x.CityName }).ToList();
+                return Json(cities);
+            }
+        }
+        public ActionResult GetRegions(Guid? cityId)
+        {
+            using (var db = new ApplicationDbContext())
+            {
+                var regions = db.Regions.Where(c => c.CityId == cityId).OrderBy(o => o.RegionName).Select(x => new { x.Id, x.RegionName }).ToList();
+                return Json(regions);
+            }
+        }
         public ActionResult Create()
         {
             ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName");
             ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName");
             ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName");
-            ViewBag.DistrictId = new SelectList(regionService.GetAll(), "Id", "DistrictName");
+           
             var customer = new Customer();
             return View(customer);
 
@@ -54,7 +71,7 @@ namespace EfendiTextile.Admin.Controllers
             ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName", customer.RegionId);
             ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName", customer.CityId);
             ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName", customer.CountryId);
-            ViewBag.DistrictId = new SelectList(districtService.GetAll(), "Id", "DistrictName", customer.DistrictId);
+            
 
 
 
@@ -74,8 +91,7 @@ namespace EfendiTextile.Admin.Controllers
             ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName", customer.RegionId);
             ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName", customer.CityId);
             ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName", customer.CountryId);
-            ViewBag.DistrictId = new SelectList(districtService.GetAll(), "Id", "DistrictName", customer.DistrictId);
-
+           
 
 
             return View(customer);
@@ -102,8 +118,7 @@ namespace EfendiTextile.Admin.Controllers
             ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName", customer.RegionId);
             ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName", customer.CityId);
             ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName", customer.CountryId);
-            ViewBag.DistrictId = new SelectList(districtService.GetAll(), "Id", "DistrictName", customer.DistrictId);
-
+          
 
 
             return View();

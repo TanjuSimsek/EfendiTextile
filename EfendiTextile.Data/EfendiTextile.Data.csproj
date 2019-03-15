@@ -60,14 +60,21 @@
     <Compile Include="Builder\CityBuilder.cs" />
     <Compile Include="Builder\CountryBuilder.cs" />
     <Compile Include="Builder\CustomerBuilder.cs" />
-    <Compile Include="Builder\DistrictBuilder.cs" />
     <Compile Include="Builder\OfferBuilder.cs" />
     <Compile Include="Builder\OrderBuilder.cs" />
     <Compile Include="Builder\ProductBuilder.cs" />
     <Compile Include="Builder\RegionBuilder.cs" />
-    <Compile Include="Migrations\201903121020594_InitialCreate.cs" />
-    <Compile Include="Migrations\201903121020594_InitialCreate.Designer.cs">
-      <DependentUpon>201903121020594_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\201903150956165_InitialCreate.cs" />
+    <Compile Include="Migrations\201903150956165_InitialCreate.Designer.cs">
+      <DependentUpon>201903150956165_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903151007555_InitialCreate1.cs" />
+    <Compile Include="Migrations\201903151007555_InitialCreate1.Designer.cs">
+      <DependentUpon>201903151007555_InitialCreate1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903151130032_InitialCreate2.cs" />
+    <Compile Include="Migrations\201903151130032_InitialCreate2.Designer.cs">
+      <DependentUpon>201903151130032_InitialCreate2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,8 +92,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903121020594_InitialCreate.resx">
-      <DependentUpon>201903121020594_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903150956165_InitialCreate.resx">
+      <DependentUpon>201903150956165_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903151007555_InitialCreate1.resx">
+      <DependentUpon>201903151007555_InitialCreate1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903151130032_InitialCreate2.resx">
+      <DependentUpon>201903151130032_InitialCreate2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
