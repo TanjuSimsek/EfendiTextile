@@ -10,6 +10,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using EfendiTextile.Admin.Models;
 using EfendiTextile.Model;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace EfendiTextile.Admin.Controllers
 {
@@ -18,15 +19,28 @@ namespace EfendiTextile.Admin.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationRoleManager _roleManager;
+            
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager ,ApplicationRoleManager  roleManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            _roleManager = roleManager;
+        }
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? HttpContext.GetOwinContext().Get<ApplicationRoleManager>();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -134,12 +148,25 @@ namespace EfendiTextile.Admin.Controllers
                     return View(model);
             }
         }
+        private void CreateDefaultRoles()
+        {
+            if (!RoleManager.RoleExists("Admin"))
+            {
+                RoleManager.Create(new IdentityRole() { Name = "Admin" });
+            }
+            if (!RoleManager.RoleExists("User"))
+            {
+                RoleManager.Create(new IdentityRole() { Name = "User" });
+            }
+        }
 
         //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
         {
+            CreateDefaultRoles();
+            ViewBag.Roles = new SelectList(RoleManager.Roles.ToList(), "Id", "Name");
             return View();
         }
 
@@ -148,7 +175,7 @@ namespace EfendiTextile.Admin.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model,string RoleId)
         {
             if (ModelState.IsValid)
             {
@@ -156,6 +183,8 @@ namespace EfendiTextile.Admin.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    var role = RoleManager.FindById(RoleId);
+                    UserManager.AddToRole(user.Id, role.Name);
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
@@ -166,9 +195,10 @@ namespace EfendiTextile.Admin.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+
                 AddErrors(result);
             }
-
+            ViewBag.Roles = new SelectList(RoleManager.Roles.ToList(), "Id", "Name", RoleId);
             // If we got this far, something failed, redisplay form
             return View(model);
         }
