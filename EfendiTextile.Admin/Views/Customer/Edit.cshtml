@@ -1,20 +1,22 @@
 ﻿@model EfendiTextile.Model.Customer
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Edit";
 }
 
-<h2>Create</h2>
+<h2>Edit</h2>
 
 
-@using (Html.BeginForm("Create","Customer", FormMethod.Post, new { id = "createForm"}))
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    
     <div class="form-horizontal">
         <h4>Customer</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -88,32 +90,33 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CountryId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.RegionId, "RegionId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CountryId", null, "Ülke Seçiniz", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("RegionId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CountryId, "CountryId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("CountryId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CountryId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CityId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CityId, "CityId", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("CityId", null, "Şehir Seçiniz", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CityId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CityId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.RegionId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("RegionId", null, "İlçe Seçiniz", htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.RegionId, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CustomerStatusType, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EnumDropDownListFor(model => model.CustomerStatusType, "Müşteri Tipi Seçiniz", htmlAttributes: new { @class = "form-control" })
+                @Html.EnumDropDownListFor(model => model.CustomerStatusType, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CustomerStatusType, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -126,7 +129,13 @@
             </div>
         </div>
 
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedAt, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.UpdatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -136,7 +145,13 @@
             </div>
         </div>
 
-
+        <div class="form-group">
+            @Html.LabelFor(model => model.UpdatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.UpdatedAt, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.UpdatedAt, "", new { @class = "text-danger" })
+            </div>
+        </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -150,66 +165,16 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-default" />
             </div>
         </div>
     </div>
-  }
+}
 
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-
-
-
-
-@section scripts {
+@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
-    <script>
-        jQuery(document).ready(function () {
-            // ülke değiştiğinde..
-            jQuery("#CountryId").change(function () {
-                LoadCities();
-            });
-
-            jQuery("#CityId").change(function () {
-                LoadRegions();
-            });
-
-            function LoadCities() {
-                // seçili ülkenin şehirleri getir
-                jQuery.post("@Url.Action("GetCities")", { countryId: jQuery("#CountryId").val() },
-                    function (data) {
-                        // gelen şehirleri selecte aktar
-
-                        // önce şehir selectini temizle
-                        jQuery("#CityId").empty();
-                        jQuery("#CityId").append('<option value="">Şehir seçiniz</option>');
-                        // döngüyle gelen şehir datasına şehir selectine ekle
-                        jQuery.each(data, function (index, value) {
-                            jQuery("#CityId").append('<option value="' + value.Id + '">' + value.CityName + '</option>');
-                        });
-                        LoadRegions();
-                });
-            }
-            function LoadRegions() {
-                jQuery.post("@Url.Action("GetRegions")", { cityId: jQuery("#CityId").val() },
-                    function (data) {
-                        // önce ilçe selectini temizle
-                          jQuery("#RegionId").empty();
-                          jQuery("#RegionId").append('<option value="">İlçe seçiniz</option>');
-                        // döngüyle gelen ilçe datasına ilçe selectine ekle
-                          jQuery.each(data, function (index, value) {
-                              jQuery("#RegionId").append('<option value="' + value.Id + '">' + value.RegionName + '</option>');
-                        });
-                });
-            }
-
-          
-        //  jQuery.get("/Home/KrokiYolunuGetir", function (data) {
-        //      jQuery("#img1").attr("src", data);
-        //});
-    });
-    </script>
 }

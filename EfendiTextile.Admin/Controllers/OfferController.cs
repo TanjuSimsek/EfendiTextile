@@ -27,8 +27,9 @@ namespace EfendiTextile.Admin.Controllers
         }
         public ActionResult Create()
         {
-            var offer = new Offer();
-            return View(offer);
+            ViewBag.OfferId = new SelectList(offerService.GetAll(), "Id", "CategoryName");
+            var product = new Product();
+            return View(product);
         }
         [HttpPost]
 

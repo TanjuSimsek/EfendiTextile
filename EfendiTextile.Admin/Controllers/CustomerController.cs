@@ -50,16 +50,16 @@ namespace EfendiTextile.Admin.Controllers
         }
         public ActionResult Create()
         {
-            var customer = new Customer();
+                var customer = new Customer();
             //ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName");
-            //ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName");
-            //ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName");
-            using (var db = new ApplicationDbContext())
-            {
-                ViewBag.CountryId = new SelectList(db.Countries.OrderBy(c => c.CountryName).ToList(), "CountryId", "CountryName");
-                ViewBag.CityId = new SelectList(db.Cities.OrderBy(c => c.CityName).Where(w => w.CountryId == customer.CountryId).ToList(), "CityId", "CityName");
-                ViewBag.RegionId = new SelectList(db.Regions.OrderBy(c => c.RegionName).Where(w => w.CityId == customer.CityId).ToList(), "RegionId", "RegionName");
-            }
+           
+                ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName");
+                ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName");
+                ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName");
+            
+            //ViewBag.CityId = new SelectList( Cities.OrderBy(c => c.CityName).Where(w => w.CountryId == customer.CountryId).ToList(), "Id", "CityName");
+            //ViewBag.RegionId = new SelectList(db.Regions.OrderBy(c => c.RegionName).Where(w => w.CityId == customer.CityId).ToList(), "Id", "RegionName");
+
 
             return View(customer);
 
@@ -68,20 +68,12 @@ namespace EfendiTextile.Admin.Controllers
         public ActionResult Create(Customer customer)
         {
 
-            try
+            if (ModelState.IsValid)
             {
-                using (var db = new ApplicationDbContext())
-                {
-                    customer.Id = Guid.NewGuid();
-                    db.Customers.Add(customer);
-                    db.SaveChanges();
-                    return Json(new { success = true });
-                }
+                customerService.Insert(customer);
+                return RedirectToAction("Index");
             }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, message = ex.Message });
-            }
+            return View();
 
 
         }
