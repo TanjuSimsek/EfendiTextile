@@ -50,11 +50,17 @@ namespace EfendiTextile.Admin.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName");
-            ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName");
-            ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName");
-           
             var customer = new Customer();
+            //ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName");
+            //ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName");
+            //ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName");
+            using (var db = new ApplicationDbContext())
+            {
+                ViewBag.CountryId = new SelectList(db.Countries.OrderBy(c => c.CountryName).ToList(), "CountryId", "CountryName");
+                ViewBag.CityId = new SelectList(db.Cities.OrderBy(c => c.CityName).Where(w => w.CountryId == customer.CountryId).ToList(), "CityId", "CityName");
+                ViewBag.RegionId = new SelectList(db.Regions.OrderBy(c => c.RegionName).Where(w => w.CityId == customer.CityId).ToList(), "RegionId", "RegionName");
+            }
+
             return View(customer);
 
         }
@@ -62,22 +68,26 @@ namespace EfendiTextile.Admin.Controllers
         public ActionResult Create(Customer customer)
         {
 
-            if (ModelState.IsValid)
+            try
             {
-
-                customerService.Insert(customer);
-                return RedirectToAction("Index");
+                using (var db = new ApplicationDbContext())
+                {
+                    customer.Id = Guid.NewGuid();
+                    db.Customers.Add(customer);
+                    db.SaveChanges();
+                    return Json(new { success = true });
+                }
             }
-            ViewBag.RegionId = new SelectList(regionService.GetAll(), "Id", "RegionName", customer.RegionId);
-            ViewBag.CityId = new SelectList(cityService.GetAll(), "Id", "CityName", customer.CityId);
-            ViewBag.CountryId = new SelectList(countryService.GetAll(), "Id", "CountryName", customer.CountryId);
-            
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
 
 
-
-
-            return View();
-
+        }
+        private IDisposable ApplicationDbContext()
+        {
+            throw new NotImplementedException();
         }
         public ActionResult Edit(Guid id)
         {
