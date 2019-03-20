@@ -55,7 +55,7 @@ namespace EfendiTextile.Admin
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication.User.Identity).As<System.Security.Principal.IIdentity>();
             builder.RegisterType(typeof(UnitOfWork)).As(typeof(IUnitOfWork)).InstancePerRequest();
             //servisleri register et
-            builder.RegisterType(typeof(BillService)).As(typeof(IBillService)).InstancePerDependency();
+         
             builder.RegisterType(typeof(CategoryService)).As(typeof(ICategoryService)).InstancePerDependency();
             builder.RegisterType(typeof(CityService)).As(typeof(ICityService)).InstancePerDependency();
             builder.RegisterType(typeof(CountryService)).As(typeof(ICountryService)).InstancePerDependency();

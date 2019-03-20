@@ -11,16 +11,20 @@ namespace EfendiTextile.Model
     {
         public Offer() {
 
-            Customers = new HashSet<Customer>();
+           
             Products = new HashSet<Product>();
+          
         }
         [Display(Name ="Teklif Açıklama")]
         public string Description { get; set; }
         [DataType(DataType.Currency)]
-        [Display(Name = "Teklif")]
+        [Display(Name = "Teklif Fiyat")]
         public float OfferPrice { get; set; }
-        public virtual  ICollection<Customer> Customers { get; set; }
+        [Display(Name = "Müşteri")]
+        public Guid? CustomerId { get; set; }
+        public virtual Customer Customer { get; set; }
         public virtual ICollection<Product> Products { get; set; }
+       
 
 
     }

@@ -13,11 +13,15 @@ namespace EfendiTextile.Model
             Products = new HashSet<Product>();
 
         }
-        [Display(Name ="Birim Fiyatı")]
+        [Display(Name ="Satış Fiyatı")]
         [DataType(DataType.Currency)]
-        public float UnitPrice { get; set; }
-        [Display(Name = "Adet")]
+        public decimal UnitPrice { get; set; }
+        [Display(Name = "İstenilen Tarih")]
+        public DateTime RequiredDate { get{ return DateTime.Now; } }
+        [Display(Name = "Miktar")]
         public int Quantity { get; set; }
+        [Display(Name = "Tutar")]
+        public decimal Amount { get { return UnitPrice * Quantity; }  }
 
 
         public virtual ICollection<Product> Products { get; set; }

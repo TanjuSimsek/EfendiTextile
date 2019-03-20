@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace EfendiTextile.Model
 {
-   public class Customer:BaseEntity
+    public class Customer : BaseEntity
     {
-        public Customer() {
-
-            Bills = new HashSet<Bill>();
+        public Customer(){
             Offers = new HashSet<Offer>();
+
         }
 
 
@@ -48,11 +47,14 @@ namespace EfendiTextile.Model
         [Display(Name = "Şehir")]
         public Guid? CityId { get; set; }
         public virtual City City { get; set; }
-       
+      
+
         [Display(Name ="Müşteri Durum")]
         public  CustomerStatusType CustomerStatusType{ get; set; }
-        public virtual  ICollection<Bill> Bills { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }
+
+
+
 
     }
 }

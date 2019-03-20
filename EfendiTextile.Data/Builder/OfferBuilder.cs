@@ -15,13 +15,7 @@ namespace EfendiTextile.Data.Builder
 
             entity.Property(p => p.Description).IsRequired().HasMaxLength(200);
             entity.Property(p => p.OfferPrice).IsRequired();
-            entity.HasMany(p => p.Customers)
-              .WithMany(s => s.Offers).Map(cs =>
-              {
-                  cs.MapLeftKey("CustomerId");
-                  cs.MapRightKey("OfferId");
-                  cs.ToTable("CustomerOfOffer");
-              });
+            entity.HasRequired(p => p.Customer).WithMany(p => p.Offers).HasForeignKey(f => f.CustomerId);
             entity.HasMany(p => p.Products)
              .WithMany(s => s.Offers).Map(cs =>
              {

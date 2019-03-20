@@ -42,7 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoryService .cs" />
-    <Compile Include="BillService.cs" />
     <Compile Include="CityService.cs" />
     <Compile Include="CountryService.cs" />
     <Compile Include="CustomerService.cs" />

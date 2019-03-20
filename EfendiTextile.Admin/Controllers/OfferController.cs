@@ -27,9 +27,10 @@ namespace EfendiTextile.Admin.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.OfferId = new SelectList(offerService.GetAll(), "Id", "CategoryName");
-            var product = new Product();
-            return View(product);
+            ViewBag.CustomerId = new SelectList(customerService.GetAll(), "Id", "CustomerName");
+            ViewBag.ProductId = new SelectList(productService.GetAll(), "Id", "ProductName");
+            var offer = new Offer();
+            return View(offer);
         }
         [HttpPost]
 
@@ -40,6 +41,9 @@ namespace EfendiTextile.Admin.Controllers
                 offerService.Insert(offer);
                 return RedirectToAction("Index");
             }
+            // ViewBag.ProductId = new MultiSelectList(productService.GetAll(), "Id", "ProductName", offer.Products.Select(s => s.Id).ToList());
+            ViewBag.CustomerId = new SelectList(customerService.GetAll(), "Id", "CustomerName", offer.CustomerId);
+          //  ViewBag.ProductId = new SelectList(productService.GetAll(), "Id", "ProductName", offer.);
             return View();
         }
         public ActionResult Edit(Guid id)

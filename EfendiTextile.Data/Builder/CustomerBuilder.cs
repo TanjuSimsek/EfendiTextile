@@ -16,6 +16,7 @@ namespace EfendiTextile.Data.Builder
             entity.Property(e => e.CustomerSurname).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Address).IsRequired().HasMaxLength(200);
             entity.HasRequired(e => e.Region).WithMany(c => c.Customers).HasForeignKey(p => p.RegionId);
+            
 
         }
     }

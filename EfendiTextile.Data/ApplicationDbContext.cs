@@ -21,7 +21,7 @@ namespace EfendiTextile.Data
             return new ApplicationDbContext();
         }
 
-        public virtual DbSet<Bill> Bills { get; set; }
+       
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Customer> Customers { get; set; }
         public virtual DbSet<Offer> Offers { get; set; }
@@ -31,7 +31,7 @@ namespace EfendiTextile.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            new BillBuilder(modelBuilder.Entity<Bill>());
+           
             new CategoryBuilder(modelBuilder.Entity<Category>());
             new CustomerBuilder(modelBuilder.Entity<Customer>());
             new OfferBuilder(modelBuilder.Entity<Offer>());
