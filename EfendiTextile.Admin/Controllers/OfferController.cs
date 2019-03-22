@@ -28,7 +28,8 @@ namespace EfendiTextile.Admin.Controllers
         public ActionResult Create()
         {
             ViewBag.CustomerId = new SelectList(customerService.GetAll(), "Id", "CustomerName");
-            ViewBag.ProductId = new SelectList(productService.GetAll(), "Id", "ProductName");
+            // ViewBag.ProductId = new SelectList(productService.GetAll(), "Id", "ProductName");
+            ViewBag.Products = productService.GetAll();
             var offer = new Offer();
             return View(offer);
         }
@@ -43,7 +44,7 @@ namespace EfendiTextile.Admin.Controllers
             }
             // ViewBag.ProductId = new MultiSelectList(productService.GetAll(), "Id", "ProductName", offer.Products.Select(s => s.Id).ToList());
             ViewBag.CustomerId = new SelectList(customerService.GetAll(), "Id", "CustomerName", offer.CustomerId);
-          //  ViewBag.ProductId = new SelectList(productService.GetAll(), "Id", "ProductName", offer.);
+            ViewBag.Products = productService.GetAll();
             return View();
         }
         public ActionResult Edit(Guid id)
