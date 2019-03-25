@@ -16,6 +16,7 @@ namespace EfendiTextile.Model
           
         }
         [Display(Name ="Teklif Açıklama")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [DataType(DataType.Currency)]
         [Display(Name = "Teklif Fiyat")]
