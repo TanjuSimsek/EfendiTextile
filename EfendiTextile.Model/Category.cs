@@ -16,6 +16,7 @@ namespace EfendiTextile.Model
         [Display(Name = "Category Adı")]
         public string CategoryName { get; set; }
         [Display(Name = "Category Açıklama")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "Category Fotograf")]
         public string Photo { get; set; }
