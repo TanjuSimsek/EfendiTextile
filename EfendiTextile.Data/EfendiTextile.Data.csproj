@@ -63,13 +63,9 @@
     <Compile Include="Builder\OrderBuilder.cs" />
     <Compile Include="Builder\ProductBuilder.cs" />
     <Compile Include="Builder\RegionBuilder.cs" />
-    <Compile Include="Migrations\201903200958529_InitialCreate.cs" />
-    <Compile Include="Migrations\201903200958529_InitialCreate.Designer.cs">
-      <DependentUpon>201903200958529_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201903201036259_InitialCreate1.cs" />
-    <Compile Include="Migrations\201903201036259_InitialCreate1.Designer.cs">
-      <DependentUpon>201903201036259_InitialCreate1.cs</DependentUpon>
+    <Compile Include="Migrations\201903261036099_InitialCreate.cs" />
+    <Compile Include="Migrations\201903261036099_InitialCreate.Designer.cs">
+      <DependentUpon>201903261036099_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -87,11 +83,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201903200958529_InitialCreate.resx">
-      <DependentUpon>201903200958529_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201903201036259_InitialCreate1.resx">
-      <DependentUpon>201903201036259_InitialCreate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201903261036099_InitialCreate.resx">
+      <DependentUpon>201903261036099_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

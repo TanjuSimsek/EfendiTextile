@@ -2,6 +2,8 @@
 using EfendiTextile.Service;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -31,13 +33,35 @@ namespace EfendiTextile.Admin.Controllers
         }
         [HttpPost]
       
-        public ActionResult Create(Product product)
+        public ActionResult Create(Product product, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
-               productService.Insert(product);
-                return RedirectToAction("Index");
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(upload.FileName);
+                    string extension = Path.GetExtension(fileName).ToLower();
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
+                    {
+                        string path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
+                        upload.SaveAs(path);
+                        product.Photo = fileName;
+                        productService.Insert(product);
+                        return RedirectToAction("index");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Photo", "Dosya uzantısı .jpg, .jpeg, .png ya da .gif olmalıdır.");
+                    }
+                }
+                else
+                {
+                    productService.Insert(product);
+                    return RedirectToAction("index");
+                }
+
             }
+
             ViewBag.CategoryId = new SelectList(categoryService.GetAll(), "Id", "CategoryName",product.CategoryId);
             return View();
         }
@@ -55,11 +79,27 @@ namespace EfendiTextile.Admin.Controllers
         }
         [HttpPost]
     
-        public ActionResult Edit(Product product)
+        public ActionResult Edit(Product product, HttpPostedFileBase upload)
         {
             if (ModelState.IsValid)
             {
                 var model = productService.Find(product.Id);
+                if (upload != null && upload.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(upload.FileName);
+                    string extension = Path.GetExtension(fileName).ToLower();
+                    if (extension == ".jpg" || extension == ".jpeg" || extension == ".png" || extension == ".gif")
+                    {
+                        string path = Path.Combine(ConfigurationManager.AppSettings["uploadPath"], fileName);
+                        upload.SaveAs(path);
+                        model.Photo = fileName;
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("Photo", "Dosya uzantısı .jpg, .jpeg, .png ya da .gif olmalıdır.");
+                    }
+                }
+                
                 model.ProductName = product.ProductName;
                 model.QuantityPerUnit = product.QuantityPerUnit;
                 model.BuyyingPrice = product.BuyyingPrice;

@@ -25,6 +25,8 @@ namespace EfendiTextile.Model
         public bool UnıtsInStock { get; set; }
         [Display(Name = "KategoriId")]
         public Guid? CategoryId { get; set; }
+        [Display(Name = "Ürün Fotograf")]
+        public string Photo { get; set; }
         public virtual Category Category { get; set; }
         public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Offer> Offers { get; set; }

@@ -18,8 +18,6 @@ namespace EfendiTextile.Model
         [Display(Name = "Category Açıklama")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        [Display(Name = "Category Fotograf")]
-        public string Photo { get; set; }
         public virtual ICollection<Product> Products { get; set; }
 
     }
