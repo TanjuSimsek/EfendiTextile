@@ -11,12 +11,12 @@ using System.Web.Mvc;
 namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
-    public class ProductController:Controller
+    public class ProductController:ControllerBase
     {
        
         private readonly ICategoryService categoryService;
         private readonly IProductService productService;
-        public ProductController(ICategoryService categoryService, IProductService productService) {
+        public ProductController(ICategoryService categoryService, IProductService productService,ApplicationUserManager userManager):base(userManager) {
             this.categoryService = categoryService;
             this.productService = productService;
 

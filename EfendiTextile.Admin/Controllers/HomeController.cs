@@ -8,8 +8,11 @@ using System.Web.Mvc;
 namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
+        public HomeController(ApplicationUserManager userManager) : base(userManager) {
+
+        }
         public ActionResult Index()
         {
             return View();

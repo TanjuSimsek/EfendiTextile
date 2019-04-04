@@ -9,12 +9,12 @@ using System.Web.Mvc;
 namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
-    public class OfferController:Controller
+    public class OfferController:ControllerBase
     {
         private readonly IProductService productService;
         private readonly ICustomerService customerService;
         private readonly IOfferService offerService;
-        public OfferController(IProductService productService, ICustomerService customerService, IOfferService offerService) {
+        public OfferController(IProductService productService, ICustomerService customerService, IOfferService offerService,ApplicationUserManager userManager):base(userManager) {
             this.productService = productService;
             this.customerService = customerService;
             this.offerService = offerService;

@@ -12,12 +12,12 @@ using System.Web.Mvc;
 namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
-    public class ApplicationUserController :Controller
+    public class ApplicationUserController :ControllerBase
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
-        public ApplicationUserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager) 
+        public ApplicationUserController(ApplicationUserManager userManager, ApplicationSignInManager signInManager, ApplicationRoleManager roleManager) :base(userManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -117,26 +117,8 @@ namespace EfendiTextile.Admin.Controllers
             return View();
 
 
-            ///////
-            //if (ModelState.IsValid)
-            //{
-            //    var model = UserManager.FindById(user.Id);
-            //    model.FullName = user.FullName;
-            //    model.Email = user.Email;
-            //    model.Photo = user.Photo;
-            //    UserManager.Update(model);
-
-            //    var oldRoles = model.Roles.Select(r => r.RoleId).ToList();
-            //    var rolesToRemove = _roleManager.Roles.Where(w => oldRoles.Contains(w.Id)).Select(r => r.Name).ToArray();
-            //    UserManager.RemoveFromRoles(user.Id, rolesToRemove);
-            //    var rolesToAdd = _roleManager.Roles.Where(w => SelectedRole.Contains(w.Id)).Select(r => r.Name).ToArray();
-            //    UserManager.AddToRoles(user.Id, rolesToAdd);
-
-            //    return RedirectToAction("Index");
-            //}
-            //ViewBag.Roles = _roleManager.Roles.ToList();
-
-            //return View();
+            
+           
         }
     }
 }
