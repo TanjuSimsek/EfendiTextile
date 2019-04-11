@@ -1,4 +1,5 @@
 ﻿using EfendiTextile.Data;
+using EfendiTextile.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,12 +10,14 @@ namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
     public class HomeController : ControllerBase
-    {
-        public HomeController(ApplicationUserManager userManager) : base(userManager) {
-
+    {   private readonly IProductService productService;
+        public HomeController(ApplicationUserManager userManager, IProductService productService) : base(userManager) {
+            this.productService = productService;
         }
         public ActionResult Index()
         {
+            ViewBag.UserCount = userManager.Users.Count();
+            ViewBag.ProductCount = productService.GetAll().Count();
             return View();
         }
 
