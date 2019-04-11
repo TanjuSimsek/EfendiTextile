@@ -13,12 +13,12 @@ namespace EfendiTextile.Model
 
             Products = new HashSet<Product>();
         }
-        [Display(Name = "Category Adı")]
+        [Display(Name = "Kategori Adı")]
         public string CategoryName { get; set; }
-        [Display(Name = "Category Açıklama")]
+        [Display(Name = "Kategori Açıklama")]
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
-        [Display(Name = "Category Fotograf")]
+        [Display(Name = "Kategori Fotoğraf")]
         public string Photo { get; set; }
         public virtual ICollection<Product> Products { get; set; }
 

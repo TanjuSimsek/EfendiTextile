@@ -3,11 +3,12 @@
 @{
     ViewBag.Title = "Index";
 }
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
 <div class="right_col" role="main">
-    <h2>Index</h2>
-
     <p>
-        @Html.ActionLink("Create New", "Create")
+        <a href=" @Url.Action("Create")" , class="btn btn-success btn-xs">Yeni Ürün Ekle</a>
     </p>
     <table class="table" id="myTable">
         <thead>
@@ -79,10 +80,10 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.IsActive)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <td aria-selected="false" class="dx-cell-focus-disabled text-nowrap" style="text-align: left;">
+                        <a href="@Url.Action("Edit",new { id=item.Id})"><span class="fa fa-pencil" title="Düzenle"></span></a>
+                        <a href="@Url.Action("Delete",new { id=item.Id})"><span class="fa fa-trash" title="Sil"></span></a>
+                        <a href="@Url.Action("Details",new { id=item.Id})"><span class="fa fa-pencil-square-o" title="Ayrıntılar"></span></a>
                     </td>
                 </tr>
             }

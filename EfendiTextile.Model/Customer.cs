@@ -16,6 +16,7 @@ namespace EfendiTextile.Model
 
 
         [Display(Name = "Açıklama")]
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         [Display(Name = "Borç")]
         [DataType(DataType.Currency)]

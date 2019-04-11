@@ -14,7 +14,7 @@ namespace EfendiTextile.Model
             Orders = new HashSet<Order>();
             Offers = new HashSet<Offer>();
         }
-        [Display(Name ="Urün Adı")]
+        [Display(Name ="Ürün Adı")]
         public string ProductName { get; set; }
         [Display(Name ="Miktar")]
         public int QuantityPerUnit { get; set; }
