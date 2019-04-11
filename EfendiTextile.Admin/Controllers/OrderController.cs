@@ -9,11 +9,11 @@ using System.Web.Mvc;
 namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
-    public class OrderController:Controller
+    public class OrderController:ControllerBase
     {   
         private readonly IProductService productService;
         private readonly IOrderService orderService;
-        public OrderController(IOrderService orderService, IProductService productService)
+        public OrderController(IOrderService orderService, IProductService productService,ApplicationUserManager userManager):base(userManager)
         {
             this.orderService = orderService;
             this.productService = productService;

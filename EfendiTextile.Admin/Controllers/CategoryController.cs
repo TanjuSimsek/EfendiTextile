@@ -8,10 +8,10 @@ using System.Web.Mvc;
 
 namespace EfendiTextile.Admin.Controllers
 {
-    public class CategoryController:Controller
+    public class CategoryController:ControllerBase
     {
         private readonly ICategoryService categoryService;
-        public CategoryController(ICategoryService categoryService) {
+        public CategoryController(ICategoryService categoryService,ApplicationUserManager userManager):base(userManager) {
 
             this.categoryService = categoryService;
 

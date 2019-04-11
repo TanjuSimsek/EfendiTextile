@@ -14,7 +14,6 @@ namespace EfendiTextile.Data.Migrations
                         Id = c.Guid(nullable: false),
                         CategoryName = c.String(nullable: false, maxLength: 200),
                         Description = c.String(nullable: false, maxLength: 200),
-                        Photo = c.String(),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
@@ -33,6 +32,7 @@ namespace EfendiTextile.Data.Migrations
                         BuyyingPrice = c.Single(nullable: false),
                         UnıtsInStock = c.Boolean(nullable: false),
                         CategoryId = c.Guid(nullable: false),
+                        Photo = c.String(),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
@@ -50,7 +50,7 @@ namespace EfendiTextile.Data.Migrations
                         Id = c.Guid(nullable: false),
                         Description = c.String(nullable: false, maxLength: 200),
                         OfferPrice = c.Single(nullable: false),
-                        CustomerId = c.Guid(),
+                        CustomerId = c.Guid(nullable: false),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
                         UpdatedBy = c.String(),
@@ -58,7 +58,7 @@ namespace EfendiTextile.Data.Migrations
                         IsActive = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Customers", t => t.CustomerId)
+                .ForeignKey("dbo.Customers", t => t.CustomerId, cascadeDelete: true)
                 .Index(t => t.CustomerId);
             
             CreateTable(
@@ -78,7 +78,6 @@ namespace EfendiTextile.Data.Migrations
                         RegionId = c.Guid(nullable: false),
                         CountryId = c.Guid(),
                         CityId = c.Guid(),
-                        OfferId = c.Guid(nullable: false),
                         CustomerStatusType = c.Int(nullable: false),
                         CreatedBy = c.String(),
                         CreatedAt = c.DateTime(nullable: false),
@@ -89,12 +88,10 @@ namespace EfendiTextile.Data.Migrations
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.Countries", t => t.CountryId)
                 .ForeignKey("dbo.Cities", t => t.CityId)
-                .ForeignKey("dbo.Offers", t => t.OfferId, cascadeDelete: true)
                 .ForeignKey("dbo.Regions", t => t.RegionId, cascadeDelete: true)
                 .Index(t => t.RegionId)
                 .Index(t => t.CountryId)
-                .Index(t => t.CityId)
-                .Index(t => t.OfferId);
+                .Index(t => t.CityId);
             
             CreateTable(
                 "dbo.Cities",
@@ -269,7 +266,6 @@ namespace EfendiTextile.Data.Migrations
             DropForeignKey("dbo.ProductOfOffer", "ProductId", "dbo.Offers");
             DropForeignKey("dbo.Offers", "CustomerId", "dbo.Customers");
             DropForeignKey("dbo.Customers", "RegionId", "dbo.Regions");
-            DropForeignKey("dbo.Customers", "OfferId", "dbo.Offers");
             DropForeignKey("dbo.Regions", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Customers", "CityId", "dbo.Cities");
             DropForeignKey("dbo.Customers", "CountryId", "dbo.Countries");
@@ -287,7 +283,6 @@ namespace EfendiTextile.Data.Migrations
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
             DropIndex("dbo.Regions", new[] { "CityId" });
             DropIndex("dbo.Cities", new[] { "CountryId" });
-            DropIndex("dbo.Customers", new[] { "OfferId" });
             DropIndex("dbo.Customers", new[] { "CityId" });
             DropIndex("dbo.Customers", new[] { "CountryId" });
             DropIndex("dbo.Customers", new[] { "RegionId" });

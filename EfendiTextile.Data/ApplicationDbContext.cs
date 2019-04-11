@@ -46,6 +46,6 @@ namespace EfendiTextile.Data
 
         public System.Data.Entity.DbSet<EfendiTextile.Model.Country> Countries { get; set; }
 
-      
+        //public System.Data.Entity.DbSet<EfendiTextile.Model.ApplicationUser> ApplicationUsers { get; set; }
     }
 }

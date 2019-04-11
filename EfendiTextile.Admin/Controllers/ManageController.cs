@@ -11,16 +11,16 @@ using EfendiTextile.Admin.Models;
 namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : ControllerBase
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
-        public ManageController()
+        public ManageController(ApplicationUserManager userManager):base(userManager)
         {
         }
 
-        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
+        public ManageController(ApplicationUserManager userManager, ApplicationSignInManager signInManager):base(userManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;

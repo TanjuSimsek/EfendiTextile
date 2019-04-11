@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace EfendiTextile.Admin.Controllers
 {
-    public class CustomerController:Controller
+    public class CustomerController:ControllerBase
     {
        
         private readonly ICustomerService customerService;
@@ -18,7 +18,7 @@ namespace EfendiTextile.Admin.Controllers
         private readonly ICityService cityService;
       
         
-        public CustomerController(ICustomerService customerService,IRegionService regionService,ICountryService countryService,ICityService cityService) {
+        public CustomerController(ICustomerService customerService,IRegionService regionService,ICountryService countryService,ICityService cityService,ApplicationUserManager userManager):base(userManager) {
             this.customerService = customerService;
             this.regionService = regionService;
             this.countryService = countryService;
