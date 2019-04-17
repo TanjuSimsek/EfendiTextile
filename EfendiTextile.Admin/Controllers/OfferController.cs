@@ -1,4 +1,5 @@
-﻿using EfendiTextile.Model;
+﻿using EfendiTextile.Admin.Models;
+using EfendiTextile.Model;
 using EfendiTextile.Service;
 using System;
 using System.Collections.Generic;
@@ -9,12 +10,13 @@ using System.Web.Mvc;
 namespace EfendiTextile.Admin.Controllers
 {
     [Authorize]
-    public class OfferController:ControllerBase
+    public class OfferController : ControllerBase
     {
         private readonly IProductService productService;
         private readonly ICustomerService customerService;
         private readonly IOfferService offerService;
-        public OfferController(IProductService productService, ICustomerService customerService, IOfferService offerService,ApplicationUserManager userManager):base(userManager) {
+        public OfferController(IProductService productService, ICustomerService customerService, IOfferService offerService, ApplicationUserManager userManager) : base(userManager)
+        {
             this.productService = productService;
             this.customerService = customerService;
             this.offerService = offerService;
@@ -67,7 +69,7 @@ namespace EfendiTextile.Admin.Controllers
                 var model = offerService.Find(offer.Id);
                 model.Description = offer.Description;
                 model.OfferPrice = offer.OfferPrice;
-                
+
 
                 offerService.Update(model);
                 return RedirectToAction("Index");
@@ -84,5 +86,26 @@ namespace EfendiTextile.Admin.Controllers
             return View(offerService.Find(id));
         }
 
+        public ActionResult GetProduct(string name)
+        {
+            var product = productService.GetAllByName(name).ToList();
+            if (product == null || product.Count == 0)
+                return Json(new ResponseData
+                {
+                    IsSuccess = false,
+                    data = null
+                }, JsonRequestBehavior.AllowGet);
+            var data = new
+            {
+                ProductName = product[0].ProductName,
+                QuantityPerUnit = product[0].QuantityPerUnit,
+                UnıtsInStock = product[0].UnıtsInStock
+            };
+            return Json(new ResponseData
+            {
+                IsSuccess = true,
+                data = data
+            }, JsonRequestBehavior.AllowGet);
+        }
     }
 }

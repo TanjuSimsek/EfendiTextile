@@ -24,7 +24,7 @@ namespace EfendiTextile.Admin.Controllers
             //if (filterContext.Controller.ControllerContext.RouteData.Values["controller"].ToString().ToLower() != "account") { 
             var userName = filterContext.HttpContext.User.Identity.Name;
             var user = userManager.FindByNameAsync(userName).Result;
-            ViewBag.photo = "/Fotograf/" + user.Photo;
+            //ViewBag.photo = "/Fotograf/" + user.Photo;
             //}
             base.OnActionExecuted(filterContext);
         }
